@@ -121,7 +121,7 @@ rm -rf /root/reality-test     # 测试脚本生成的临时文件，里面有 UU
 
 **更换网页：** 用新的 `index.html` 覆盖 `/var/www/mysite/index.html`，不需要重启。或者把它和脚本放在同一目录，重新运行 `setup-site.sh`。
 
-**每日变化：** 默认首页每天自动轮换"今日推荐"影片和列表顺序，大图右下角显示当天日期（`TODAY'S PICK · 30 OCT`），页脚年份自动更新。日期由 Nginx 的 SSI 在服务端写入页面（按服务器时区），不依赖任何外部服务；开启 SSI 后响应不再带 `Last-Modified` / `ETag`，和动态站点一致。旧版首页（`frame-video-v1`）重新运行 `setup-site.sh` 即可升级，原文件会先备份。
+**每日变化：** 默认首页每天自动轮换"今日推荐"影片和列表顺序，大图右下角显示当天日期（`TODAY'S PICK · 30 OCT`），页脚年份自动更新。日期由 Nginx 的 SSI 在服务端写入页面（按服务器时区），不依赖任何外部服务；开启 SSI 后响应不再带 `Last-Modified` / `ETag`，和动态站点一致。旧版首页（`frame-video-v1`）重新运行 `setup-site.sh` 即可升级，旧首页直接覆盖，不做备份。
 
 **证书续期：** certbot 会自动续期。可以偶尔检查一下：
 

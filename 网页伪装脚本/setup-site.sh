@@ -73,18 +73,9 @@ fi
 green "[3/6] 准备网站页面 ..."
 mkdir -p "$WEBROOT"
 # 仅自动升级本脚本的默认博客/视频模板，保留未知的自定义首页。
-BACKUP_FILE=""
-backup_index() {
-  if [[ -f "$WEBROOT/index.html" ]]; then
-    BACKUP_FILE="$WEBROOT/index.html.bak.$(date +%Y%m%d-%H%M%S).$$"
-    cp -p -- "$WEBROOT/index.html" "$BACKUP_FILE"
-    yellow "原首页已备份到 $BACKUP_FILE"
-  fi
-}
 if [[ -L "$WEBROOT/index.html" ]]; then
   yellow "首页为符号链接，保留不动；请手动检查后替换。"
 elif [[ -f "$SCRIPT_DIR/index.html" && "$SCRIPT_DIR" != "$WEBROOT" ]]; then
-  backup_index
   cp -- "$SCRIPT_DIR/index.html" "$WEBROOT/index.html"
   yellow "已使用脚本同目录下你自己的 index.html。"
 elif [[ -f "$WEBROOT/index.html" ]] &&
@@ -93,7 +84,6 @@ elif [[ -f "$WEBROOT/index.html" ]] &&
          grep -Fq 'The bakery that opens at six' "$WEBROOT/index.html"; }; then
   yellow "$WEBROOT/index.html 为自定义首页，保留不动。"
 else
-  backup_index
 cat > "$WEBROOT/index.html" <<'HTML'
 <!doctype html>
 <html lang="en">
